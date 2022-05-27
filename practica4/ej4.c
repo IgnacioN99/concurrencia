@@ -9,14 +9,14 @@ class EJ4{
     al cliente.
   */
   int N;
-  cha pedido(int),
+  cha pedido[N](int),
       pagar(int),
       llegada(int)
       irse(int);
   process cliente[id:0..N-1]{
     int idCabina;
     send llegada(id);
-    receive pedido(idCabina);
+    receive pedido[id](idCabina);
     //usar la cabina
     send pagar(idCabina);
     receive irse(idCabina);
@@ -30,14 +30,13 @@ class EJ4{
           receive llegada(idCliente);
           idCabina=CabinaVacia(cabinas);
           cabinas[idCabina] = idCliente;
-          send pedido(idCabina);
+          send pedido[idCliente](idCabina);
         }
       }else{
         receive pagar(idCabina);
         cabinas[idCabina] = 0;
         Cobrar();
         send irse(idCabina);
-      }
       }
     }
   }
