@@ -39,10 +39,12 @@ class EJ2{
         receive devolver_caja(idCaja);
         filaEnCaja[idCaja]--;
       }
-      recive turno(idActual);
-      int idCaja = minimo(filaEnCaja);
-      send elegir_caja[idActual](idCaja);
-      filaEnCaja[idCaja]++;
+      if (not empty(turno())){
+        recive turno(idActual);
+        int idCaja = minimo(filaEnCaja);
+        send elegir_caja[idActual](idCaja);
+        filaEnCaja[idCaja]++;
+      }
     }
   }
 }
