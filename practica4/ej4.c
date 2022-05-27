@@ -9,19 +9,35 @@ class EJ4{
     al cliente.
   */
   int N;
-  cha pedido(int)
-  cha pagar(int)
+  cha pedido(int),
+      pagar(int),
+      llegada(int)
+      irse(int);
   process cliente[id:0..N-1]{
     int idCabina;
+    send llegada(id);
     receive pedido(idCabina);
     //usar la cabina
     send pagar(idCabina);
+    receive irse(idCabina);
   }
   process empleado{
     int cabinas[10] = ([10] 0);
+    int idCliente,idCabina;
     while(true){
       if(empty pagar()){
-        
+        if(not empty llegada()){
+          receive llegada(idCliente);
+          idCabina=CabinaVacia(cabinas);
+          cabinas[idCabina] = idCliente;
+          send pedido(idCabina);
+        }
+      }else{
+        receive pagar(idCabina);
+        cabinas[idCabina] = 0;
+        Cobrar();
+        send irse(idCabina);
+      }
       }
     }
   }
