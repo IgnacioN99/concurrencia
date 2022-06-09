@@ -28,18 +28,3 @@ class EJ1 {
     }
   }
 }
-class EJ2{
-  /*
-  Se desea modelar el funcionamiento de un banco en el cual existen 5 cajas para realizar
-  pagos. Existen P personas que desean pagar. Para esto cada una selecciona la caja donde
-  hay menos personas esperando, una vez seleccionada espera a ser atendido.
-  NOTA: maximizando la concurrencia.
-  */
-  int P;
-  process persona[id:0..P-1]{
-
-  }
-  process caja[id:0..5]{
-    
-  }
-}
